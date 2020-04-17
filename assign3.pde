@@ -312,22 +312,37 @@ void keyPressed(){
     if(key ==CODED){
       switch(keyCode){
       case LEFT:
-      if(leftPressed == false){
-        leftPressed = true;
-        if(nowTime-oldTime >250){
+      if(leftPressed == false){ 
           leftPressed = true;
-          hogFrame = 0;
+          noPressed = false;
+          hogFrame =0;
           mainX = groundhogIdleX;
-          oldTime = nowTime;        
+          if (groundhogIdleX <= 0){
+            groundhogIdleX = 0;
+          }
         }
-      }
+      //if(leftPressed == false){
+      //  leftPressed = true;
+      //  if(nowTime-oldTime >250){
+      //    leftPressed = true;
+      //    hogFrame = 0;
+      //    mainX = groundhogIdleX;
+      //    oldTime = nowTime;        
+      //  }
+      //}
       break;
       
       case DOWN:
-        if(downPressed == false){ 
+        if(downPressed == false){
+          rollingDown = true;
           downPressed = true;
           noPressed = false;
-          groundhogIdleY += GRID;
+          hogFrame = 0;
+          mainY = groundhogIdleY;
+          if(baselineY <=-20*GRID){
+            baselineY = -20*GRID;
+          }        
+          oldTime = nowTime;
           if (groundhogIdleY >= height){
             groundhogIdleY = GRID*5;
           }
@@ -349,15 +364,24 @@ void keyPressed(){
       //break;
       
       case RIGHT:
-      if(rightPressed == false){
-        rightPressed = true;
-        if(nowTime-oldTime >250){
+      if(rightPressed == false){ 
           rightPressed = true;
-          hogFrame = 0;
+          noPressed = false;
+          hogFrame =0;
           mainX = groundhogIdleX;
-          oldTime = nowTime;
+          if (groundhogIdleX >= width-GRID){
+            groundhogIdleX = width-GRID;
+          }
         }
-      }
+      //if(rightPressed == false){
+      //  rightPressed = true;
+      //  if(nowTime-oldTime >250){
+      //    rightPressed = true;
+      //    hogFrame = 0;
+      //    mainX = groundhogIdleX;
+      //    oldTime = nowTime;
+      //  }
+      //}
       break;
       }
     }
