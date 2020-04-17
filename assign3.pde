@@ -314,13 +314,14 @@ void keyPressed(){
       case LEFT:
       if(leftPressed == false){ 
           leftPressed = true;
-          noPressed = false;
-          hogFrame =0;
-          mainX = groundhogIdleX;
+          noPressed = false;          
           if (groundhogIdleX <= 0){
             groundhogIdleX = 0;
           }
+          oldTime = nowTime;
         }
+        hogFrame =0;
+        mainX = groundhogIdleX;
       //if(leftPressed == false){
       //  leftPressed = true;
       //  if(nowTime-oldTime >250){
@@ -337,16 +338,16 @@ void keyPressed(){
           rollingDown = true;
           downPressed = true;
           noPressed = false;
-          hogFrame = 0;
-          mainY = groundhogIdleY;
-          if(baselineY <=-20*GRID){
-            baselineY = -20*GRID;
-          }        
-          oldTime = nowTime;
           if (groundhogIdleY >= height){
             groundhogIdleY = GRID*5;
           }
+          oldTime = nowTime;
         }
+        hogFrame = 0;
+        mainY = groundhogIdleY;
+        if(baselineY <=-20*GRID){
+          baselineY = -20*GRID;
+        }       
         break;
       //if(downPressed == false){
       //  downPressed = true;
@@ -366,13 +367,14 @@ void keyPressed(){
       case RIGHT:
       if(rightPressed == false){ 
           rightPressed = true;
-          noPressed = false;
-          hogFrame =0;
-          mainX = groundhogIdleX;
+          noPressed = false;          
           if (groundhogIdleX >= width-GRID){
             groundhogIdleX = width-GRID;
           }
+          oldTime = nowTime;
         }
+        hogFrame =0;
+        mainX = groundhogIdleX;
       //if(rightPressed == false){
       //  rightPressed = true;
       //  if(nowTime-oldTime >250){
