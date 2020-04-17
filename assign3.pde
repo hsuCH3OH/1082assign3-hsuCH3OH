@@ -28,6 +28,7 @@ boolean rollingDown = false;
 boolean leftPressed = false;
 boolean rightPressed = false;
 boolean downPressed = false;
+boolean noPressed = true;
 
 
 // For debug function; DO NOT edit or remove this!
@@ -323,20 +324,29 @@ void keyPressed(){
       break;
       
       case DOWN:
-      if(downPressed == false){
-        downPressed = true;
-        if(nowTime-oldTime >250){
-          rollingDown = true;
+        if(downPressed == false){ 
           downPressed = true;
-          hogFrame = 0;
-          mainY = groundhogIdleY;
-          if(baselineY <=-20*GRID){
-            baselineY = -20*GRID;
-          }        
-          oldTime = nowTime;
+          noPressed = false;
+          groundhogIdleY += GRID;
+          if (groundhogIdleY >= height){
+            groundhogIdleY = GRID*5;
+          }
         }
-      }
-      break;
+        break;
+      //if(downPressed == false){
+      //  downPressed = true;
+      //  if(nowTime-oldTime >250){
+      //    rollingDown = true;
+      //    downPressed = true;
+      //    hogFrame = 0;
+      //    mainY = groundhogIdleY;
+      //    if(baselineY <=-20*GRID){
+      //      baselineY = -20*GRID;
+      //    }        
+      //    oldTime = nowTime;
+      //  }
+      //}
+      //break;
       
       case RIGHT:
       if(rightPressed == false){
