@@ -198,7 +198,10 @@ void draw() {
             image(stone1, x+GRID, y+GRID);
             image(stone1, x, y+2*GRID);  //19
             image(stone1, x+2*GRID, y+2*GRID);
-                       
+            
+            image(stone2, x, y+2*GRID);    //19
+            image(stone2, x+GRID, y+GRID); //18
+            image(stone2, x+2*GRID, y);    //17
             }
           }
         }
@@ -234,10 +237,11 @@ void draw() {
       hogFrame++;
       if(hogFrame >0 && hogFrame <15){
         
-        if(baselineY>=-20*GRID){
-        baselineY -=GRID/15.0;
+        if(baselineY > -20.0*GRID){
+        baselineY -= GRID/14.0;
         }else{
-          groundhogIdleY +=GRID/15.0;
+          groundhogIdleY += GRID/14.0;
+          baselineY = -20*GRID;
         }
         image(groundhogDownImg, groundhogIdleX, groundhogIdleY);
       }else{
@@ -290,6 +294,11 @@ void draw() {
     if (debugMode) {
         popMatrix();
     }
+    
+  // edge limit for hog
+  if (groundhogIdleX > width-GRID)  {groundhogIdleX = width-GRID;}
+  if (groundhogIdleX < 0)         {groundhogIdleX = 0;}
+  if (groundhogIdleY > height-GRID) {groundhogIdleY = height-GRID;}
 }
 
 void keyPressed(){
@@ -306,12 +315,11 @@ void keyPressed(){
         leftPressed = true;
         hogFrame = 0;
         mainX = groundhogIdleX;
-        oldTime = nowTime;
+        oldTime = nowTime;        
       }
       break;
       
-      case DOWN:
-      
+      case DOWN:      
       if(nowTime-oldTime >250){
         rollingDown = true;
         downPressed = true;
