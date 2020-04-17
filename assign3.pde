@@ -240,7 +240,7 @@ void draw() {
         if(baselineY > -20.0*GRID){
         baselineY -= GRID/14.0;
         }else{
-          groundhogIdleY += GRID/14.0;
+          groundhogIdleY += GRID/13.0;
           baselineY = -20*GRID;
         }
         image(groundhogDownImg, groundhogIdleX, groundhogIdleY);
@@ -311,33 +311,42 @@ void keyPressed(){
     if(key ==CODED){
       switch(keyCode){
       case LEFT:
-      if(nowTime-oldTime >250){
+      if(leftPressed == false){
         leftPressed = true;
-        hogFrame = 0;
-        mainX = groundhogIdleX;
-        oldTime = nowTime;        
+        if(nowTime-oldTime >250){
+          leftPressed = true;
+          hogFrame = 0;
+          mainX = groundhogIdleX;
+          oldTime = nowTime;        
+        }
       }
       break;
       
-      case DOWN:      
-      if(nowTime-oldTime >250){
-        rollingDown = true;
+      case DOWN:
+      if(downPressed == false){
         downPressed = true;
-        hogFrame = 0;
-        mainY = groundhogIdleY;
-        if(baselineY <=-20*GRID){
-          baselineY = -20*GRID;
-        }        
-        oldTime = nowTime;
+        if(nowTime-oldTime >250){
+          rollingDown = true;
+          downPressed = true;
+          hogFrame = 0;
+          mainY = groundhogIdleY;
+          if(baselineY <=-20*GRID){
+            baselineY = -20*GRID;
+          }        
+          oldTime = nowTime;
+        }
       }
       break;
       
       case RIGHT:
-      if(nowTime-oldTime >250){
+      if(rightPressed == false){
         rightPressed = true;
-        hogFrame = 0;
-        mainX = groundhogIdleX;
-        oldTime = nowTime;
+        if(nowTime-oldTime >250){
+          rightPressed = true;
+          hogFrame = 0;
+          mainX = groundhogIdleX;
+          oldTime = nowTime;
+        }
       }
       break;
       }
