@@ -9,6 +9,7 @@ final int START_BUTTON_Y = 360;
 final int GRID = 80;
 float hogFrame;
 float baselineY=0;
+float lifeQ =0; // quantity of lives
 
 int speedX,soldierXAxis,soldierYAxis, oldTime, nowTime,mainX, mainY;
 int groundhogIdleX, groundhogIdleY, groundhogMovingSpeed, groundhogMovingSpeed2;
@@ -157,20 +158,60 @@ void draw() {
       }
       
       //stone
+      //1-8 layer
       for(int i=0; i<=width; i+=GRID){
         pushMatrix();
         translate(0,i);
         image(stone1, i, GRID*2);
         popMatrix();
-    }
+      }
+      // 9-16 layer
+      for(int x =0; x<=10*GRID; x+=GRID){        
+          pushMatrix();
+          translate(0, 10*GRID);
+          for(int y=0; y< 8*GRID; y+=GRID){
+            if(x % (4*GRID) ==0){
+              if(y % (4*GRID) ==0){                
+                image(stone1, x+GRID, y);
+                image(stone1, x+2*GRID,y);
+                image(stone1, x+GRID, y+3*GRID);
+                image(stone1, x+2*GRID,y+3*GRID);
+                image(stone1, x, y+GRID);
+                image(stone1, x+3*GRID, y+GRID);
+                image(stone1, x, y+2*GRID);
+                image(stone1, x+3*GRID, y+2*GRID);
+              }
+            }
+          }
+        popMatrix();
+      }
+      //17-24 layer
+      for(int x=0; x<=8*GRID; x+=GRID){
+        pushMatrix();
+        translate(0,18*GRID);
+        for(int y=0; y<8*GRID; y+=GRID){
+          if( x %(3*GRID) == 0){
+            if(y %(3*GRID) ==0){
+            image(stone1, x+GRID, y);    //17
+            image(stone1, x+2*GRID, y);
+            image(stone1, x, y+GRID);    //18
+            image(stone1, x+GRID, y+GRID);
+            image(stone1, x, y+2*GRID);  //19
+            image(stone1, x+2*GRID, y+2*GRID);
+                       
+            }
+          }
+        }
+        popMatrix();
+      }
     
     if(rollingDown){
       popMatrix();
-    } //soil follow the downPressed amd go up
+    } //soil follow the downPressed and go up
     
     //life
-    for(playerHealth=0; playerHealth<2; playerHealth++){
-      image(life, lifeImageX+70*playerHealth,lifeImageY);
+    for(int i=0; i<2; i++){
+      image(life, lifeImageX+70*i,lifeImageY);
     }
     
     //groundhog
@@ -192,8 +233,12 @@ void draw() {
     if(downPressed){
       hogFrame++;
       if(hogFrame >0 && hogFrame <15){
-        //groundhogIdleY +=GRID/15.0;
+        
+        if(baselineY>=-20*GRID){
         baselineY -=GRID/15.0;
+        }else{
+          groundhogIdleY +=GRID/15.0;
+        }
         image(groundhogDownImg, groundhogIdleX, groundhogIdleY);
       }else{
         //groundhogIdleY = mainY+=GRID;
@@ -207,8 +252,8 @@ void draw() {
         groundhogIdleX += GRID/15.0;
         image(groundhogRightImg,groundhogIdleX, groundhogIdleY);
       }else{
-      groundhogIdleX = mainX+=GRID;
-      rightPressed = false;
+        groundhogIdleX = mainX+=GRID;
+        rightPressed = false;
       }
     }
     
@@ -266,12 +311,15 @@ void keyPressed(){
       break;
       
       case DOWN:
-      rollingDown = true;
+      
       if(nowTime-oldTime >250){
+        rollingDown = true;
         downPressed = true;
         hogFrame = 0;
         mainY = groundhogIdleY;
-        baselineY -= GRID;
+        if(baselineY <=-20*GRID){
+          baselineY = -20*GRID;
+        }        
         oldTime = nowTime;
       }
       break;
@@ -299,7 +347,6 @@ void keyPressed(){
       case 's':
       debugMode = true;
       cameraOffsetY -= 25;
-      
       break;
 
       case 'a':
