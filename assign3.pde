@@ -264,8 +264,6 @@ void draw() {
     
 		// Player
 
-		// Health UI
-
 		break;
 
 		case GAME_OVER: // Gameover Screen
@@ -322,15 +320,6 @@ void keyPressed(){
         }
         hogFrame =0;
         mainX = groundhogIdleX;
-      //if(leftPressed == false){
-      //  leftPressed = true;
-      //  if(nowTime-oldTime >250){
-      //    leftPressed = true;
-      //    hogFrame = 0;
-      //    mainX = groundhogIdleX;
-      //    oldTime = nowTime;        
-      //  }
-      //}
       break;
       
       case DOWN:
@@ -349,20 +338,6 @@ void keyPressed(){
           baselineY = -20*GRID;
         }       
         break;
-      //if(downPressed == false){
-      //  downPressed = true;
-      //  if(nowTime-oldTime >250){
-      //    rollingDown = true;
-      //    downPressed = true;
-      //    hogFrame = 0;
-      //    mainY = groundhogIdleY;
-      //    if(baselineY <=-20*GRID){
-      //      baselineY = -20*GRID;
-      //    }        
-      //    oldTime = nowTime;
-      //  }
-      //}
-      //break;
       
       case RIGHT:
       if(rightPressed == false){ 
@@ -375,15 +350,6 @@ void keyPressed(){
         }
         hogFrame =0;
         mainX = groundhogIdleX;
-      //if(rightPressed == false){
-      //  rightPressed = true;
-      //  if(nowTime-oldTime >250){
-      //    rightPressed = true;
-      //    hogFrame = 0;
-      //    mainX = groundhogIdleX;
-      //    oldTime = nowTime;
-      //  }
-      //}
       break;
       }
     }
