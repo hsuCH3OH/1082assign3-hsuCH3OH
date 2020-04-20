@@ -241,7 +241,7 @@ void draw() {
         if(baselineY > -20.0*GRID){
         baselineY -= GRID/14.0;
         }else{
-          groundhogIdleY += GRID/13.0;
+          groundhogIdleY += GRID/14.0;
           baselineY = -20*GRID;
         }
         image(groundhogDownImg, groundhogIdleX, groundhogIdleY);
