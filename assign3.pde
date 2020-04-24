@@ -9,7 +9,6 @@ final int START_BUTTON_Y = 360;
 final int GRID = 80;
 float hogFrame;
 float baselineY=0;
-float lifeQ =0; // quantity of lives
 
 int speedX,soldierXAxis,soldierYAxis, oldTime, nowTime,mainX, mainY;
 int groundhogIdleX, groundhogIdleY, groundhogMovingSpeed, groundhogMovingSpeed2;
@@ -30,9 +29,9 @@ boolean rightPressed = false;
 boolean downPressed = false;
 boolean noPressed = true;
 
-
 // For debug function; DO NOT edit or remove this!
-int playerHealth = 0;
+int startHealth = 2;
+int playerHealth = startHealth;
 float cameraOffsetY = 0;
 boolean debugMode = false;
 
@@ -213,10 +212,17 @@ void draw() {
       popMatrix();
     } //soil follow the downPressed and go up
     
-    //life
-    for(int i=0; i<2; i++){
-      image(life, lifeImageX+70*i,lifeImageY);
+    //life    
+    for (int i=0; i<playerHealth; i++){
+      if(i<5){
+      image(life, lifeImageX+70*i, lifeImageY);
+      }
     }
+    if(playerHealth == 0){
+      gameState = GAME_OVER;
+      playerHealth = startHealth;
+    }
+    
     
     //groundhog
     if(leftPressed == false && downPressed == false && rightPressed == false){
@@ -261,9 +267,6 @@ void draw() {
         rightPressed = false;
       }
     }
-    
-		// Player
-
 		break;
 
 		case GAME_OVER: // Gameover Screen
@@ -376,7 +379,4 @@ void keyPressed(){
       if(playerHealth < 5) playerHealth ++;
       break;
     }
-}
-
-void keyReleased(){
 }
